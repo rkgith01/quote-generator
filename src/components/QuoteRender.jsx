@@ -4,8 +4,7 @@
 import { useEffect, useState } from "react";
 import QuoteBox from "./QuoteBox";
 
-
-let api = "https://api.quotable.io/random"
+let api = "https://api.quotable.io/random";
 
 const QuoteRender = () => {
   const [quote, setQuote] = useState("");
@@ -57,47 +56,21 @@ const QuoteRender = () => {
         <p className="text-2xl font-semibold font-serif">
           Quote Generator + X{" "}
         </p>
-        {/* <div
-      id="quote-box"
-      className="w-3/4 md:w-1/2 bg-white p-6 rounded-lg shadow-lg text-center"
-    >
-      <div id="text" className="text-lg mb-4">
-        {quote}
-      </div>
-      <div id="author" className="text-base mb-4">
-        - {author}
-      </div>
-      <div className="px-2 flex items-center justify-center">
-        <button
-          id="new-quote"
-          onClick={handleNewQuote}
-          className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
-        >
-          <RiRefreshLine className="mr-2 h-6 w-6"/> 
-        </button>
-        <button
-          id="tweet-quote"
-          onClick={handleTweetQuote}
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
-        >
-          <RiTwitterXFill className="mr-2 h-6 w-6" />
-        </button>
-      </div>
-    </div> */}
         <QuoteBox
           quote={quote}
           author={author}
           handleNewQuote={handleNewQuote}
           handleTweetQuote={handleTweetQuote}
+          backgroundColor={backgroundColor}
         />
       </div>
       <footer style={{ backgroundColor }}>
         <div className="flex flex-col gap-2 items-center justify-center">
-          <p className="text-lg font-thin font-serif">
-            A quote generator & direct tweet webapp by{" "}
+          <p className="text-lg font-normal">
+            A quote generator & direct tweet by{" "}
             <a
               target="_blank"
-              className="text-blue-500 hover:font-bold"
+              className="text-blue-800 hover:font-bold"
               href="https://rajkapadia-dev.vercel.app/"
             >
               Raj Kapadia
