@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import QuoteBox from "./QuoteBox";
 
-let api = "https://api.quotable.io/random";
+let api = "http://api.quotable.io/random";
 
 const QuoteRender = () => {
   const [quote, setQuote] = useState("");
