@@ -4,7 +4,9 @@
 import { useEffect, useState } from "react";
 import QuoteBox from "./QuoteBox";
 
-let api = "http://api.quotable.io/random";
+// let api = "http://api.quotable.io/random";
+// let api = "https://api.api-ninjas.com/v1/quotes";
+let api = "https://qapi.vercel.app/api/random";
 
 const QuoteRender = () => {
   const [quote, setQuote] = useState("");
@@ -14,11 +16,14 @@ const QuoteRender = () => {
   const fetchRandomQuote = async () => {
     try {
       const response = await fetch(api);
+      console.log(response)
       if (!response.ok) {
         throw new Error("Failed to fetch quote");
       }
+
       const data = await response.json();
-      setQuote(data.content);
+      console.log(data);
+      setQuote(data.quote);
       setAuthor(data.author);
       setRandomBackgroundColor();
     } catch (error) {
