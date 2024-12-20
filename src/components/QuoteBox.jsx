@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-// import React from 'react'
 import { useState } from "react";
 import {
   RiTwitterXFill,
@@ -27,65 +26,72 @@ const QuoteBox = ({
     }, 2000);
   };
 
+  // Function to calculate appropriate text color based on background color brightness
+  const getTextColor = (bgColor) => {
+    const hex = bgColor.replace("#", "");
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 128 ? "#000000" : "#FFFFFF";
+  };
+
+  const textColor = getTextColor(backgroundColor);
+
   return (
-    <>
-      <div
-        id="quote-box"
-        className="w-3/4 md:w-1/2 bg-gray-950 text-white p-6 rounded-lg shadow-lg text-center font-mono"
+    <div
+      id="quote-box"
+      className="relative flex flex-col items-center max-w-lg gap-4 p-6 rounded-md shadow-md sm:py-8 sm:px-12"
+      style={{ backgroundColor, color: textColor }}
+    >
+      <button
+        id="copy-quote"
+        onClick={copyToClipboard}
+        className="absolute top-2 right-2"
       >
-        <button
-          id="copy-quote"
-          onClick={copyToClipboard}
-          className="bg-blue-500 text-white mb-2 py-1 px-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
-          style={{ backgroundColor }}
-        >
-          {copied ? (
-            <span className="mr-1" style={{ backgroundColor }}>
-              Copied!
-            </span>
-          ) : (
-            <RiFileCopy2Line
-              className="mx-2 my-2 h-5 w-5"
-              style={{ backgroundColor }}
-            />
-          )}
-        </button>
-        <div id="text" className="flex lg:text-2xl md:text-xl sm:text-lg mb-4">
-          <span>
-            <RiDoubleQuotesL className="w-8 h-8" />
-          </span>
-          <p className="p-2">{quote}</p>
-          <span className="flex items-end">
-            {" "}
-            <RiDoubleQuotesR className="w-8 h-8" />
-          </span>
-        </div>
-        <div
-          id="author"
-          className="lg:text-2xl md:text-xl sm:text-lg text-base mb-4"
-        >
-          - {author}
-        </div>
-        <div className="px-2 flex items-center justify-center">
-          <button
-            id="new-quote"
-            onClick={handleNewQuote}
-            className="bg-blue-600 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
-            style={{ backgroundColor }}
-          >
-            <RiRefreshLine className="h-7 w-7" style={{ backgroundColor }} />
-          </button>
-          <button
-            id="tweet-quote"
-            onClick={handleTweetQuote}
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
-            style={{ backgroundColor }}
-          >
-            <RiTwitterXFill className="h-7 w-7" style={{ backgroundColor }} />
-          </button>
-        </div>
+        {copied ? (
+          <span style={{ color: textColor }}>Copied!</span>
+        ) : (
+          <RiFileCopy2Line className="w-6 h-6" style={{ color: textColor }} />
+        )}
+      </button>
+      <div className="flex">
+        
+        <RiDoubleQuotesL className="w-16 h-16" style={{ color: textColor }} />
+        <RiDoubleQuotesR className="w-16 h-16" style={{ color: textColor }} />
       </div>
-    </>
+
+      <h2 className="text-2xl font-semibold leading-tight tracking-wide">
+        {quote ? quote : "Quotes Not Available."}
+      </h2>
+      <p className="flex-1 text-center">
+        {author
+          ? `- ${author}`
+          : "No author."}
+      </p>
+
+      <div className="flex gap-4">
+        <button
+          id="new-quote"
+          onClick={handleNewQuote}
+          type="button"
+          className="px-8 py-3 font-semibold rounded-full"
+          style={{ backgroundColor: textColor, color: backgroundColor }}
+        >
+          <RiRefreshLine className="h-5 w-5 inline-block mr-2" /> New Quote
+        </button>
+
+        <button
+          id="tweet-quote"
+          onClick={handleTweetQuote}
+          type="button"
+          className="px-8 py-3 font-semibold rounded-full"
+          style={{ backgroundColor: textColor, color: backgroundColor }}
+        >
+          <RiTwitterXFill className="h-5 w-5 inline-block mr-2" /> Tweet
+        </button>
+      </div>
+    </div>
   );
 };
 
