@@ -16,13 +16,13 @@ const QuoteRender = () => {
   const fetchRandomQuote = async () => {
     try {
       const response = await fetch(api);
-      console.log(response)
+      // console.log(response)
       if (!response.ok) {
         throw new Error("Failed to fetch quote");
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setQuote(data.quote);
       setAuthor(data.author);
       setRandomBackgroundColor();
